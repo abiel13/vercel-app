@@ -10,22 +10,22 @@ const route = (event) => {
 
 // set of routes that we can are available
 const routes = {
-    '/docs/': {
+    '/vercel-app/': {
         templates: './templates/home.html',
         title: "",
         Desciption: ''
     },
-    '/docs/basket': {
+    '/vercel-app/basket': {
         templates: './templates/basket.html',
         title: "",
         Desciption: ''
     },
-    '/docs/1': {
+    '/vercel-app/1': {
         templates: './books/1.html',
         title: "",
         Desciption: ''
     },
-    '/docs/2': {
+    '/vercel-app/2': {
         templates: './books/2.html',
         title: "",
         Desciption: ''
@@ -35,8 +35,8 @@ const bt = document.getElementById('btn')
 // this changes the location of the url 
 const handleLocation = async () => {
     let path = window.location.pathname; // get path name
-    if (path.length = 0 || path == '/docs/index.html' || path == '/') {
-        path = '/docs/'
+    if (path.length = 0 || path == '/vercel-app/index.html' || path == '/') {
+        path = '/vercel-app/'
         loadData();
         console.log(path)
     }
@@ -54,7 +54,7 @@ const handleLocation = async () => {
     main.innerHTML = html;
 
     // loads data into the basket page
-    if(path == '/basket'){
+    if(path == 'vercel-app/basket'){
         basketMaker();    
         }
     
