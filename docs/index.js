@@ -54,7 +54,7 @@ const handleLocation = async () => {
     main.innerHTML = html;
 
     // loads data into the basket page
-    if(path == 'vercel-app/basket'){
+    if(path == '/vercel-app/basket'){
         basketMaker();    
         }
     
