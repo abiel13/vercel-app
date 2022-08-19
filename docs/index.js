@@ -38,17 +38,17 @@ const handleLocation = async () => {
     if (path.length = 0 || path == '/vercel-app/index.html' || path == '/') {
         path = '/vercel-app/'
         loadData();
-        console.log(path)
+    
     }
     
     // sets content of the page 
     const destination = routes[path] || routes[404];
-    console.log(path)
+ 
 
     const html = await fetch(destination.templates).then((data) => data.text())
     if(destination.templates === './templates/home.html'){
         loadData();
-        console.log('you bro')
+       
     }
     var main = document.querySelector('.main')
     main.innerHTML = html;
@@ -62,14 +62,10 @@ const handleLocation = async () => {
 
 
 
-// get books from api and write to page
 function loadData() {
     fetch('https://upflex-book-store-api.herokuapp.com/books')
         .then((res) => res.json()).then((data) => {
             for (let i = 0; i < data.length; i++) {
-                console.log(data[i])
-                console.log(data[i].title)
-                console.log(data[i].id)
                 var title = data[i].title;
                 var description = data[i].metaDescription;
                 var coverImage = data[i].cover;
@@ -90,8 +86,6 @@ function buildBookCat(title, description, Image, id) {
     `</a>`
    
     div.innerHTML = divHtml;
-    console.log(div)
-
     bbb.appendChild(div);
    
 // var shwimg = document.getElementById('shwimg');
@@ -109,24 +103,21 @@ const booksArray =[]
  * my english is messed up not my fault
  * 
  */
-var lid =0;
+var lid =booksArray.length;
 var c = document.getElementById('counter')
 function BasketControls(){
 counter ++;
-
 c.textContent = 'item(s): '+counter;
 let title = document.querySelector('.titles').innerHTML;
 
 for(let i = 0; i<booksArray.length; i++){
     if(booksArray[i].title==title){
 booksArray[i].quantity += 1;
-        console.log('you put an item that already exists times 2 then')
         return;
     }
 }
 booksArray.push({'id':lid,'title':title,quantity:1});
-lid++;
-console.log(booksArray);
+lid += 1;
 }
 
 /**so this function loops through the array and draws containers 
@@ -142,32 +133,24 @@ function basketMaker(){
     let container = document.querySelector('.container')
 if(counter > 0){
 btn.textContent ='basket summary';
-}
+
 for(let i =0; i<booksArray.length; i++){
-console.log(booksArray.length)
-    let shopCon = document.createElement('div')
-
+let shopCon = document.createElement('div')
     shopCon.setAttribute('class','shopCon')
-
-    let buttons = document.createElement('button')
-
-    buttons.textContent='pay';
-buttons.addEventListener('click',()=>{console.log(booksArray)},true)
+    shopCon.setAttribute('data-name',booksArray[i].id)
     let actshopCon = document.createElement('div')
-
     let controls = document.createElement('div')
-
     actshopCon.setAttribute('class','actshopCon')
 let shop = document.createElement('div');
 let times = document.createElement('h1');
 times.setAttribute('class','bigText')
+times.setAttribute('data-times',booksArray[i].title)
 shop.setAttribute('class','shop');
 shop.textContent = booksArray[i].title;
 times.textContent = 'X'+booksArray[i].quantity;
 container.appendChild(shopCon)
 shopCon.appendChild(actshopCon)
 actshopCon.append(shop)
-actshopCon.appendChild(buttons);
 let buttonss = document.createElement('button')
 buttonss.textContent ='Remove'
 buttonss.setAttribute('data-name',booksArray[i].id)
@@ -176,35 +159,74 @@ controls.appendChild(times)
 controls.setAttribute('class','controls');
 buttonss.setAttribute('class','buttonss')
 controls.appendChild(buttonss)
-
-
-
 buttonss.addEventListener('click',remove,true)
+
+if(booksArray[i].quantity == 0){
+shopCon.style='display:none'
+    }
 }
 
+
+let buttons = document.createElement('button')
+buttons.textContent='pay';
+buttons.addEventListener('click',()=>{console.log(booksArray)},true)
+document.querySelector('.container').appendChild(buttons)
+}
+else{
+   container.innerHTML ='<a class="link" href="/" onclick="route()"> < Go Back </a> <h4 class="btn">Basket is empty</h4>'
+}
 }
 
 
 // this is my very last function 
 // it removes an object from th array list
 function remove(e){
-    var id = e.target.getAttribute('data-name')
-counter -= 1;
-booksArray[id].quantity -= 1;
-console.log(counter)
-console.log(booksArray[id].quantity)
 
-document.querySelector('.bigText').textContent ='X '+ booksArray[id].quantity;
-c.textContent = 'item(s):'+counter;
-if(booksArray[id].quantity <= 0){
-    booksArray.splice(id,1);
-console.log(booksArray)
+let id = e.target.getAttribute('data-name')
+const times = document.querySelectorAll('.bigText')
+
+   if(counter == 0){
+    counter += 0;
+   } 
+    else{
+        counter -= 1;
+        c.textContent = 'item(s):'+counter; 
+    
+for(let i=0; i<times.length; i++){
+    const signleTimes = times[i].getAttribute('data-times')
+   
+    if(booksArray[id].title === signleTimes){
+          booksArray[id].quantity -= 1;
+      times[i].textContent ='X'+   booksArray[id].quantity;
+        
+    }
+}
+    }
+
+
+if(   booksArray[id].quantity == 0){
+    booksArray[id].quantity += 0;
+    counter += 0;
+    var dvc = document.querySelectorAll('.shopCon')
+for(let i =0; i<dvc.length; i++){
+    if(dvc[i].getAttribute('data-name') == booksArray[id].id){
+        dvc[i].style ='display:none;'
+    }
+
 
 }
+
+
+if(counter == 0){
+    counter += 0;
+c.textContent ='empty';
+    basketMaker();
+}
+
 }
 
 
-
+}
 
 
 // this just handles the use of the left and right navigation arrows on

@@ -105,9 +105,9 @@ margin-top:3em;
 .shopCon{
   align-self:flex-start;
   /* background-color: red; */
-  margin-left:2em;
-  margin-top: 2em;
-  padding:30px 30px;
+  /* margin-left:2em; */
+  /* margin-top: 2em; */
+  padding:15px 15px;
   display:flex;
  
   align-items: center;
@@ -125,9 +125,9 @@ margin-top:3em;
   margin-left: .4em;
 }
 
-.shopCon button{
-  /* align-self: flex-end; */
-  margin-top: 2em;
+.container button{
+  align-self: flex-start;
+  /* margin-top: 2em; */
 font-size:1.3em;
 width: 9.5em;
 padding:14px 0px;
@@ -135,6 +135,7 @@ border-radius:10px;
 border:none;
 outline: none;
 background-color: rgb(8, 111, 245);
+margin-left:1em;
 }
 
 .container .shop{
@@ -152,6 +153,7 @@ background-color: rgb(8, 111, 245);
 }
 
 .controls .buttonss{
+margin-top:0px;
 margin-left: 20px;
 font-size:1.3em;
 width: 9.5em;
@@ -261,6 +263,7 @@ a {
   align-self: flex-end;
   border-radius: 5px;
   transition:all .6s ease-in;
+  position:relative;
 }
 #ATB:hover{
 background-color: rgba(8, 111, 245, 0.089);
@@ -269,3 +272,4 @@ background-color: rgba(8, 111, 245, 0.089);
 #btn{
   font-style: italic;
 }
+
