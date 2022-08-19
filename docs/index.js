@@ -173,7 +173,7 @@ buttons.addEventListener('click',()=>{console.log(booksArray)},true)
 document.querySelector('.container').appendChild(buttons)
 }
 else{
-   container.innerHTML ='<a class="link" href="/" onclick="route()"> < Go Back </a> <h4 class="btn">Basket is empty</h4>'
+   container.innerHTML ='<a class="link" href="/vercel-app/" onclick="route()"> < Go Back </a> <h4 class="btn">Basket is empty</h4>'
 }
 }
 
