@@ -165,17 +165,24 @@ if(booksArray[i].quantity == 0){
 shopCon.style='display:none'
     }
 }
-
-
+let filterArray = (num) =>{
+    return num.quantity > 0;
+}
 let buttons = document.createElement('button')
 buttons.textContent='pay';
-buttons.addEventListener('click',()=>{console.log(booksArray)},true)
+buttons.addEventListener('click',()=>{
+let a = booksArray.filter(filterArray);
+console.log(a)
+}
+
+,true)
 document.querySelector('.container').appendChild(buttons)
 }
 else{
-   container.innerHTML ='<a class="link" href="/vercel-app/" onclick="route()"> < Go Back </a> <h4 class="btn">Basket is empty</h4>'
+   container.innerHTML ='<a class="link" href="/" onclick="route()"> < Go Back </a> <h4 class="btn">Basket is empty</h4>'
 }
 }
+
 
 
 // this is my very last function 
